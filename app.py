@@ -13,7 +13,7 @@ def download_nltk_resources():
 download_nltk_resources()
 
 # Function to summarize text
-def summarize_text(text, num_sentences=3):
+def summarize_text(text):
     # Tokenize the text into sentences
     sentences = sent_tokenize(text)
 
@@ -26,14 +26,14 @@ def summarize_text(text, num_sentences=3):
 
     # Sort sentences by similarity score
     sentence_scores = [sum(similarity_matrix[i]) for i in range(len(sentences))]
-    ranked_sentences = sorted(((sentence_scores[i], s) for i, s in enumerate(sentences)), reverse=True)[:num_sentences]
+    ranked_sentences = sorted(((sentence_scores[i], s) for i, s in enumerate(sentences)), reverse=True)
 
-    # Get the summarized text
-    summarized_text = " ".join([s[1] for s in ranked_sentences])
+    # Get the summarized text (top 3 sentences for example)
+    summarized_text = " ".join([s[1] for s in ranked_sentences[:3]])
     return summarized_text
 
 # Function to fetch and summarize news article
-def summarize_article(url, num_sentences=3):
+def summarize_article(url):
     try:
         # Download the article
         article = Article(url)
@@ -52,10 +52,10 @@ def summarize_article(url, num_sentences=3):
 
         # Sort sentences by similarity score
         sentence_scores = [sum(similarity_matrix[i]) for i in range(len(sentences))]
-        ranked_sentences = sorted(((sentence_scores[i], s) for i, s in enumerate(sentences)), reverse=True)[:num_sentences]
+        ranked_sentences = sorted(((sentence_scores[i], s) for i, s in enumerate(sentences)), reverse=True)
 
-        # Get the summarized text
-        summarized_text = " ".join([s[1] for s in ranked_sentences])
+        # Get the summarized text (top 3 sentences for example)
+        summarized_text = " ".join([s[1] for s in ranked_sentences[:3]])
         return summarized_text
     except Exception as e:
         return "Error in summarizing the article. Please check the URL."
@@ -71,19 +71,16 @@ user_text = st.text_area("Enter the text you want to summarize")
 st.subheader("Summarize Article URL")
 article_url = st.text_input("Enter the URL of the article you want to summarize")
 
-# Number of sentences for the summary
-num_sentences = st.slider("Number of sentences for summary", 1, 10, 3)
-
 # Button to generate summaries
 if st.button("Generate Summary"):
     if user_text:
         st.subheader("Summarized Text")
-        summarized_text = summarize_text(user_text, num_sentences)
+        summarized_text = summarize_text(user_text)
         st.write(summarized_text)
 
     if article_url:
         st.subheader("Summarized Article")
-        summarized_article = summarize_article(article_url, num_sentences)
+        summarized_article = summarize_article(article_url)
         st.write(summarized_article)
 
 # Footer
