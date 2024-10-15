@@ -5,8 +5,12 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import nltk
 
+# Function to ensure NLTK resources are downloaded
+def download_nltk_resources():
+    nltk.download('punkt', quiet=True)
+
 # Download necessary NLTK data
-nltk.download('punkt')
+download_nltk_resources()
 
 # Function to summarize text
 def summarize_text(text, num_sentences=3):
