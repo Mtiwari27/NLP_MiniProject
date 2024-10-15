@@ -43,6 +43,10 @@ def summarize_article(url):
         article.download()
         article.parse()
 
+        # Ensure the article was successfully downloaded
+        if not article.is_parsed:
+            return "Error: Article could not be parsed. Please check the URL."
+
         # Tokenize the article into sentences
         sentences = sent_tokenize(article.text)
 
@@ -61,7 +65,7 @@ def summarize_article(url):
         summarized_text = " ".join([s[1] for s in ranked_sentences[:3]])
         return summarized_text
     except Exception as e:
-        return "Error in summarizing the article. Please check the URL."
+        return f"Error in summarizing the article: {str(e)}. Please check the URL."
 
 # Streamlit App
 st.title("Text and Article Summarizer")
