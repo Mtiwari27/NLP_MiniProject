@@ -8,7 +8,7 @@ import nltk
 # Function to ensure NLTK resources are downloaded
 def download_nltk_resources():
     try:
-        nltk.download('punkt_tab', quiet=True)
+        nltk.download('punkt', quiet=True)
     except Exception as e:
         print(f"Error downloading NLTK resources: {e}")
 
@@ -68,7 +68,7 @@ def summarize_article(url):
         return f"Error in summarizing the article: {str(e)}. Please check the URL."
 
 # Streamlit App
-st.title("Text and Article Summarizer")
+st.title("TextPrep AI")
 
 # Input text area for text summarization
 st.subheader("Summarize Text")
@@ -90,5 +90,9 @@ if st.button("Generate Summary"):
         summarized_article = summarize_article(article_url)
         st.write(summarized_article)
 
-# Footer
-st.write("### Group-9: Members - Nikhil Thakur, Mukund Tiwari, Rutik Jaybhaye")
+# Footer with group details and GitHub link
+st.markdown("""
+### Group-9: 
+- **Members:** Nikhil Thakur, Mukund Tiwari, Rutik Jaybhaye  
+- **GitHub Repository:** [View Repository](https://github.com/your-github-repo-url)  
+""")
