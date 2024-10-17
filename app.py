@@ -94,5 +94,5 @@ if st.button("Generate Summary"):
 st.markdown("""
 ### Group-9: 
 - **Members:** Nikhil Thakur, Mukund Tiwari, Rutik Jaybhaye  
-- **GitHub Repository:** [View Repository](https://github.com/your-github-repo-url)  
+- **GitHub Repository:** [View Repository](https://github.com/Mtiwari27/NLP_MiniProject)  
 """)
