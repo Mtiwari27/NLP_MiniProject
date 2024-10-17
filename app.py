@@ -8,7 +8,7 @@ import nltk
 # Function to ensure NLTK resources are downloaded
 def download_nltk_resources():
     try:
-        nltk.download('punkt', quiet=True)
+        nltk.download('punkt')  # Explicitly downloading 'punkt'
     except Exception as e:
         print(f"Error downloading NLTK resources: {e}")
 
